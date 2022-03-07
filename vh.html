@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Version history</title>
+
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">waterway</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="tut.html">Walkthrough</a>
+</li>
+<li>
+  <a href="runtime_options.html">Runtime Options</a>
+</li>
+<li>
+  <a href="fn.html">Functions Included</a>
+</li>
+<li>
+  <a href="config.html">Understanding config.txt</a>
+</li>
+<li>
+  <a href="rerunning.html">Optional Analyses</a>
+</li>
+<li>
+  <a href="vh.html">Version History</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Version history</h1>
+
+</div>
+
+
+<p><br></p>
+<p><strong>3.3.3</strong> – (2021-07-14) Yep, you guessed it. More bugfixes.</p>
+<p><strong>3.3.2</strong> – (2021-07-14) More bugfixes to the LEfSe table generation for subsets.</p>
+<p><strong>3.3.1</strong> – (2021-07-13) Multiple bugfixes for the LEfSe table generation, and increased verbosity of the LEfSe table generation codeblock.</p>
+<p><strong>3.3.0</strong> – (2021-07-13) LEfSe table generation has been added, which allows for automatic generation of tabulated data for use with <a href="https://huttenhower.sph.harvard.edu/galaxy/">LEfSe</a> along multiple categorical variables. Tables from taxa levels 1 (kingdom) through 7 (specie) are generated for each variable supplied. To use the LEfSe table generator, an <a href="https://www.r-project.org/">R installation</a> with <a href="https://www.tidyverse.org/">tidyverse</a> installed is required.</p>
+<p><strong>3.2.1</strong> – (2021-04-29) Picrust2 now exports <code>ec_metagenome</code> and <code>ko_metagenome</code> along with <code>pathway_abundance</code>. Various bugfixes, especially to the <code>optional_analyses.txt</code> configs.</p>
+<p><strong>3.1.1</strong> – (2020-07-30) Bugfixes and increased verbosity to the LEFse csv generation code.</p>
+<p><strong>3.1.0</strong> – (2020-07-29) Added automatic phyloseq R object creation for all datasets, including subsets if -s is specified. <code>waterway</code> also can now create .tsv files for use with LEFse, which can be set in optional_analyses.txt. The level-x.csv file must first be downloaded from taxa-bar-plots.qza. Multiple bugfixes to the new R scripts, including filepath updates and script corner case management.</p>
+<p><strong>3.0.0</strong> – (2020-07-21) A major update! The main showpiece is the newly added ability to filter down a main dataset into sub-datasets called <em>subsets</em>. Subsets can be created by adding filtered metadata files to the folder created with the option <code>-s</code>. <code>waterway</code> will automatically filter the total dataset down to the samples listed in each filtered metadata file, and will then put all subset outputs into their own folders in the directory called <code>subsets</code> in the output folder. All analyses described in both <code>config.txt</code> and <code>optional_analyses.txt</code> will be run on the main dataset and all subsets when the <code>-s</code> option is supplied. When the <code>-s</code> option is not used, <code>waterway</code> will only run analyses on the main dataset.</p>
+<p>Along with subsetting, various improvements have been made to the verbose messages for use in bug detection and fixes. Yellow messages indicating that analyses in <code>optional_analyses.txt</code> have not been run are now only shown when the <code>--verbose</code> option is supplied, reducing screen clutter.</p>
+<p><strong>2.11.0</strong> – (2020-07-20) Speed increases to the ANCOM block, especially when being run multiple times. The <code>make_collapsed_table</code> option has been removed from the ANCOM block, since it was essentially never being toggled false and only served to confuse users. Messages echoed after an optional analysis was not run now only appear when the <code>--verbose</code> option is used with <code>waterway</code>. Further bugfixes to the ANCOM block.</p>
+<p><strong>2.10.0</strong> – (2020-07-09) Quite a lot of bugfixes, including fixing a newly-broken ANCOM codeblock. Added the file <code>add_to_bashrc.bash</code>, that will automatically set the alias <code>waterway</code> as a shorthand to run <code>waterway.bash</code> if prompted. Also had a large code review, with some code chunks being simplified down (mostly getting rid of excess loops and echo statements).</p>
+<p><strong>2.9.0</strong> – (2020-07-03) Mostly a long needed code cleanup and partition for me. Code has been majorly broken up into smaller chunks, instead of one huge script (which was impossible for me to maintain after a while). The smaller chunks of code are located in the src folder, and are called by the master file waterway.bash. Smaller chunks of code being edited at a time is easier for me to maintain in the long run and can be more efficient, as the same chunk of code can be called multiple times under different decision trees. All variables are passed from waterway.bash to the code chunk and vice versa. Also moved some of the other help files into their own folder.</p>
+<p><strong>2.8.0</strong> – (2020-06-11) Added <code>Songbird</code> as a possible analysis. Added metadata filtering to continuous <code>beta diversity</code> analyses and <code>Songbird</code> analyses.</p>
+<p><strong>2.7.0</strong> – (2020-06-02) Removed the <code>rerun-alpha-and-phyloseq</code> block in <code>optional_analyses.txt</code>, and replaced it with an <code>extended_alpha</code> block that allows for all alpha diversity measures to be calculated and visualized. Vectors and visualizations are stored under <code>alpha_diversities</code> in the output folder.</p>
+<p><strong>2.6.1</strong> – (2020-05-29) Removed heatmap generation when <code>sample-classifier</code> is applied to continuous data (because you can’t do that, duh!). Many bugfixes to the metadata filtering script, as well as the filtering block as a whole. The filtering script now supports more modular filepath generation, allowing for more flexibility in use.</p>
+<p><strong>2.6.0</strong> – (2020-05-27) Added heatmap generation to <code>sample-classifier regress-samples-ncv</code>. Both normal and NCV sample-classifiers using continuous data now first filter the metadata files (similar to beta diversity metadata filtering) as well as <code>table.qza</code> files. Multiple bugfixes to the <code>sample-classifier</code> and <code>beta-diversity</code> blocks.</p>
+<p><strong>2.5.0</strong> – (2020-05-27) <code>waterway</code> now first filters the metadata file by any missing values when computing distance matrices for beta diversity between numeric (continuous) groups. The placeholder for missing values should denoted by <code>missing_samples=</code> in <code>config.txt</code>. In practice, this means that if data that don’t exist are labelled as “Absent” in the metadata file, the parameter in <code>config.txt</code> should be <code>missing_samples='Absent'</code>. The filtering is done via an R script, which adds two R package dependencies (<code>Tidyverse</code> and <code>data.table</code>), although <code>data.table</code> should be installed by default. Future coding around <code>conda</code> commands has been made slightly easier, as <code>waterway</code> can now access <code>conda</code> commands without throwing errors (<code>conda</code> does not export functions other than the main <code>conda</code> function by default).</p>
+<p><strong>2.4.0</strong> – (2020-05-22) Added <a href="https://docs.qiime2.org/2020.2/plugins/available/diversity/beta-rarefaction/">beta-rarefaction</a> outputs during the main code block (diversity block) for the following metrics: <code>'euclidean' 'correlation' 'weighted_normalized_unifrac' 'seuclidean' 'braycurtis' 'unweighted_unifrac' 'sqeuclidean' 'generalized_unifrac' 'aitchison' 'matching' 'weighted_unifrac' 'jaccard'</code>. The <code>--p-iterations</code> option is set to <code>20</code> to allow for greater certainty in the generated jackknife plots, and the <code>--p-metric</code> is set to <code>upgma</code>. Also added <code>diversity bioenv</code> analysis to both <code>unweighted_unifrac</code> and <code>weighted_unifrac</code> distances in <code>optional_analyses.txt</code>. Some more bugfixes to the <code>sample-classifier</code> block.</p>
+<p><strong>2.3.1</strong> – (2020-05-21) Additional summarization added to the <code>sample-classifier</code> block, along with bugfixes.</p>
+<p><strong>2.3.0</strong> – (2020-05-20) Added multiple <code>sample-classifier</code> commands, primarily <code>classify-samples</code>, <code>regress-samples</code>, and the nested cross validation variation for both as described in <a href="https://docs.qiime2.org/2020.2/tutorials/sample-classifier/">this tutorial</a>. Also added visualization commands to <code>sample-classifier</code> outputs, along with confusion matrices, heatmap, and scatterplot visualizations. Added many options to <code>optional_analyses.txt</code> to allow for tuning of variables in each of these commands.</p>
+<p><strong>2.2.0</strong> – (2020-05-18) Added the ability to correlate beta diversity measures (unweighted and weighted Unifrac distances) to continuous variables in the data using a <a href="https://docs.qiime2.org/2020.2/plugins/available/diversity/mantel/">Mantel test</a>. Added <code>table.qza</code> and <code>rep-seqs.qza</code> filtering, based on filtered metadata files when using the option <code>-F</code> or <code>--filter-tables</code>. A couple of small bugfixes regarding <code>filter-table</code> looping and the logging functions.</p>
+<p><strong>2.1.4</strong> – (2020-05-18) Changed the ANCOM analyses to be able to generate multiple analyses for different taxa levels in one run. The rerun block has been moved to execution after the main codeblock, meaning that rerunning alpha or beta analyses will no longer throw errors when run before <code>sklearn</code> is finished.</p>
+<p><strong>2.1.3</strong> – (2020-05-11) Rewrote the logging system and cleaned up the code. Functions are now in place to direct outputs to stdout, stderr, logfiles, or stdout only when verbose is true. Combinations of these are also implemented, making the code much more transparent and removing clutter. Some bugfixes regarding some echo messages have been implemented.</p>
+<p><strong>2.1.2</strong> – (2020-05-11) Rewrote the manifest file generation in bash, eliminating any reliance on python from <code>waterway</code> itself. Manifest file generation is also more flexible, and what patterns are unique to filenames containing forward or reverse reads can now be specified in <code>config.txt</code>. Multiple bugs relating to output text color have been fixed, and more logging text has been included (as always).</p>
+<p><strong>2.1.1</strong> – (2020-05-07) ANCOM analyses filenames now include the level of taxa the feature table was collapsed to, allowing for multiple ANCOM runs to be made without needing to manually rename files.</p>
+<p><strong>2.1.0</strong> – (2020-05-06) Added color-coded output for all waterway messages (Qiime2 messages have been left with default colors). Filenames and filepaths are magenta, commands are cyan, success messages are green, errors are red, and warnings in yellow. Logfiles do not show color-coded output.</p>
+<p><strong>2.0.0</strong> – (2020-04-29) Major update to <code>waterway</code>, with two new added analyses (Picrust2 and DEICODE), changes and streamlining to the <code>config.txt</code> file, improvements to both the <code>-l</code> (logging) and <code>-v</code> (verbose) options, and a ton of bugfixes. The <a href="https://library.qiime2.org/plugins/q2-picrust2/13/">Picrust2</a> and <a href="https://library.qiime2.org/plugins/deicode/19/">DEICODE</a> plugins to Qiime2 must be manually installed first before allowing the commands to be run in <code>optional_analyses.txt</code>. The Picrust2 plugin workflow follows the workflow recommended in the plugin <a href="https://github.com/picrust/picrust2/wiki/q2-picrust2-Tutorial">tutorial</a>, as does the <a href="https://library.qiime2.org/plugins/deicode/19/">DEICODE workflow</a>.</p>
+<p>The config file has also had a few changes. Because the number entered into <code>alpha_depth</code> and <code>sampling_depth</code> were identical or similar numbers by design, <code>alpha_depth</code> has been removed, and <code>sampling_depth</code> is now used in the alpha rarefaction depth instead. The last <code>qzaoutput</code> variable in the <code>config.txt</code> file has now been removed from <code>config.txt</code> and has been put into the main codebase in <code>waterway</code> instead, removing the possibility of accidentally modifying it and breaking <code>waterway</code>. Variables needed for both Picrust2 and DEICODE analyses have been added to <code>optional_analyses.txt</code>.</p>
+<p>Exit clauses have been removed from all optional analyses, which means that multiple optional analyses can be run at once. <code>waterway</code> now can recognize the Qiime2 environment’s version number, which is now displayed with the <code>waterway</code> version number when the <code>-n</code> (version) option is supplied. Some code framework has been added to make coding some other options easier in the future. <code>waterway</code> exit codes have been reworked to actually make sense (different problems have specified exit codes instead of randomly assigning exit codes based on my mood that day), and are described in <code>waterway_exit_codes.txt</code>, which has been added to the github folder. Many more outputs can be seen on <code>stdout</code> when the <code>-l</code> (logging) option is supplied, allowing for easier tracking of <code>waterway</code> pipeline progression. More data and variable states are displayed with the <code>-v</code> (verbose) option when supplied, allowing for easier debugging when combined with the <code>-l</code> (logging) option.</p>
+<p><code>waterway</code> also now checks that Qiime2 commands are available when executed, and exits while advising the user to activate the Qiime2 environment first if Qiime2 commands are not currently available. Bugfixes were made to multiple loops in the rerun blocks, as well as some broken logging statements. The stability of manifest file generation using the <code>-M</code> option was improved, along with the hyphen replace <code>-r</code> option. Updated the <a href="http://marqueslab.erc.monash.edu/home/michael/waterway_docs/QYyBgctVnjnFvSFij7qJrMul6/fn.html">functions used documentation</a> to reflect all changes, and added the Picrust2 and DEICODE analyses functions.</p>
+<p><strong>1.5.0</strong> – (2020-04-24) Added the ability to replace underscores with hyphens using the <code>-r</code> option (useful for changing filenames to Cassava 1.8 format if Sample ID was inputted with underscores), specific to certain patterns in patterns_to_replace.txt (which will be generated on first running the <code>r</code> command). Major bugfixes to the manifest file generation <code>-M</code> option now means that it outputs the proper manifest.tsv file with non-broken filenames. Added flexibility to filepath inputs for the variables filepath, projpath, and qzaoutput so that it doesn’t matter whether they end with a slash or not. Updated the test output. A couple of other smaller bugfixes regarding the logging <code>l</code> option, and a bit of code was inserted to get ready for single-end analysis support.</p>
+<p><strong>1.4.3</strong> – (2020-04-22) Added ability to run fastQC and multiQC through the use of the <code>-F</code> option. The fastQC and multiQC are run on the raw files located in the filepath, and are</p>
+<p><strong>1.4.2</strong> – (2020-03-12) Major bugfixes to the beta diversity rerun step. Beta diversity reruns now output all reruns into a new folder called <code>beta_div_rerun</code>, located in the <code>outputs/truncF-truncR/</code> directory.</p>
+<p><strong>1.4.1</strong> – (2020-03-10) Bugfixes to the manifest file creation step.</p>
+<p><strong>1.4.0</strong> – (2020-03-06) Added the ability to create manifest files through usage of the -M command. Users can now change the type of manifest format through the <code>manifest_format</code> variable in <code>config.txt</code>, and bugfixes to alpha diversity analysis.</p>
+<p><strong>1.3.1</strong> – (2020-03-05) Minor bugfixes to the DADA2 visualization step.</p>
+<p><strong>1.3.0</strong> – (2020-03-04) <code>waterway</code> now parses the first argument provided as the directory containing config/optional_analyses.txt, allowing users to separate out different config files in different folders without copy/pasting <code>waterway.bash</code> into each one. If no argument is provided, <code>waterway</code> uses the current working directory instead. Also makes it easier when waterway is specified as an alias in .bashrc. Now can rerun beta and ANCOM analyses over multiple groups at once, instead of having to rerun them over and over. Bugfixes to both beta and ANCOM analyses blocks, and updates to the <code>optional_analyses.txt</code> file.</p>
+<p><strong>1.2.4</strong> – (2020-02-22) Vital bugfixes for PCoA biplot analyses, and some small echo fixes.</p>
+<p><strong>1.2.3</strong> – (2020-02-22) Included both ANCOM and PCoA biplot analyses under the optional analyses section, and updated this website which was quite out of date with all the new additions.</p>
+<p><strong>1.2.2</strong> – (2020-02-21) Included the option to rerun alpha rarefaction, and included an optional gneiss gradient-correlation analysis step after the main codeblock is ran. To reflect these changes and the added analyses’ non-mandatory nature, <code>analysis_to_rerun.txt</code> was changed to <code>optional_analyses.txt</code>. Further improved the -c classifier training option usability: <code>waterway</code> now detects whether the qza files exist in the script directory at every step, allowing the classifier training to start midway, saving time. Many improvements in echo clarity, including improved -v verbose output. Vital bugfixes to the core-metrics-phylogenetic codeblock, so it actually works now.</p>
+<p><strong>1.2.1</strong> – (2020-02-19) Various bugfixes relating to <code>analysis_to_rerun.txt</code>.</p>
+<p><strong>1.2.0</strong> – (2020-02-19) Added beta diversity analysis to the diversity analysis block. You can now only rerun the beta diversity analysis through setting the variable to true in the newly created file: analysis_to_rerun.txt. Also added the -n or –version option to print.</p>
+<p><strong>1.1.1</strong> – (2020-02-15) When the “-c” option is used with <code>waterway</code>, you no longer need to manually change the classifierpath variable in the config file. <code>waterway</code> now automatically resets the variable to point to the newly created classifierpath, no matter whether created in the script directory or at greengenes_path.</p>
+<p><strong>1.1.0</strong> – (2020-02-09) Added the “-c” option, allowing <code>waterway</code> to automatically train a classifier for use with sk_learn. <code>waterway</code> now automatically detects whether you already have the prerequisite files to train the classifier with (greengenes database files), and downloads them automatically if you don’t. The sourcefile has now been named <code>config.txt</code> for clarity. The masterfile requirement was removed, with <code>waterway</code> now directly sourcing the config file. Other assorted bugfixes including some echo message fixes, a crash-inducing bug at the dada2 step, and many classifier-induced bugs.</p>
+<p><strong>1.0.1</strong> – (2020-01-26) Changed “alpha_depth” and “max_depth” breakpoint from before tree generation to after tree generation, and fixed some echo messages being where they weren’t supposed to.</p>
+<p><strong>1.0.0</strong> – (2020-01-22) Original commit.</p>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

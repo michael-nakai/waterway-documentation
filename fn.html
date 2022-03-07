@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Functions used in waterway</title>
+
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span. { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">waterway</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="tut.html">Walkthrough</a>
+</li>
+<li>
+  <a href="runtime_options.html">Runtime Options</a>
+</li>
+<li>
+  <a href="fn.html">Functions Included</a>
+</li>
+<li>
+  <a href="config.html">Understanding config.txt</a>
+</li>
+<li>
+  <a href="rerunning.html">Optional Analyses</a>
+</li>
+<li>
+  <a href="vh.html">Version History</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Functions used in waterway</h1>
+
+</div>
+
+
+<p><br></p>
+<div id="overview" class="section level1">
+<h1><strong>Overview</strong></h1>
+<p>The included functions are broken up into 6 general sections:</p>
+<ol style="list-style-type: decimal">
+<li>Importing</li>
+<li>DADA2-based denoising</li>
+<li>Unrooted/rooted tree generation</li>
+<li>Core-metrics generation</li>
+<li>Taxonomic labelling</li>
+<li>Optional analyses</li>
+</ol>
+<p>In addition, <code>waterway</code> will automatically terminate after certain steps if certain conditions are met:</p>
+<ul>
+<li><code>truncF=()</code> or <code>truncR=()</code> in the sourcefile
+<ul>
+<li>Automatically stops after importing data</li>
+</ul></li>
+<li><code>sampling_depth=0</code> in the sourcefile
+<ul>
+<li>Automatically stops after DADA2 denoising</li>
+</ul></li>
+</ul>
+<p><br><br></p>
+<div id="import-step" class="section level2">
+<h2><strong>Import step</strong></h2>
+<div id="qiime-tools-import" class="section level3">
+<h3>qiime tools import</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ex">qiime</span> tools import \</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">    --type <span class="st">&#39;SampleData[PairedEndSequencesWithQuality]&#39;</span> \</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">    --input-path <span class="va">$filepath</span> \</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">    --input-format CasavaOneEightSingleLanePerSampleDirFmt \</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">    --output-path <span class="va">${qzaoutput}</span>imported_seqs.qza</a></code></pre></div>
+<p>The normal <code>qiime tools import</code> is invoked when the -m option for waterway isn’t specified. The import assumes that the files are named according to the Cassava 1.8 naming conventions.</p>
+<p><a href="https://docs.qiime2.org/2019.10/tutorials/importing/#casava-1-8-paired-end-demultiplexed-fastq">Qiime 2 Documentation</a></p>
+<p>Alternatively, if the -m option is specified, the input path instead points to the manifest file path supplied in the sourcefile, and the function run instead changes to the one below:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ex">qiime</span> tools import \</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">    --type <span class="st">&#39;SampleData[PairedEndSequencesWithQuality]&#39;</span> \</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">    --input-path <span class="va">$manifest</span> \</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">    --input-format PairedEndFastqManifestPhred33V2 \</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">    --output-path <span class="va">${qzaoutput}</span>imported_seqs.qza</a></code></pre></div>
+<p>The manifest file should be constructed according to the <a href="https://docs.qiime2.org/2019.10/tutorials/importing/#id12">Qiime 2 documentation</a>. Alternatively, you can use the <code>make_manifest</code> tool I made for easier construction, <a href="https://www.dropbox.com/s/nq5tvc7nqpwuu4z/make_manifest.zip?dl=0">available here</a>. Take note that this function assumes that the files use Phred33 quality score encoding.</p>
+<p><a href="https://docs.qiime2.org/2019.10/tutorials/importing/#pairedendfastqmanifestphred33v2">Qiime 2 Documentation</a></p>
+<p><br></p>
+</div>
+<div id="qiime-demux-summarize" class="section level3">
+<h3>qiime demux summarize</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="ex">qiime</span> demux summarize \</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">    --i-data <span class="va">${qzaoutput}</span>imported_seqs.qza \</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">    --o-visualization <span class="va">${qzaoutput}</span>imported_seqs.qzv</a></code></pre></div>
+<p>This function uses the imported_seqs.qza from the original import function to output a qzv file that shows base quality for both forward and backward reads. As a general rule, Phred quality scores above a 20-22 are considered usable, while anything below should not be taken in the next DADA2 denoising step. If the import step has been previously done and has outputted the imported_seqs.qza, <code>waterway</code> will start from this visualization step.</p>
+<p><a href="https://docs.qiime2.org/2019.10/plugins/available/demux/summarize/">Qiime 2 Documentation</a></p>
+<p><br><br></p>
+</div>
+</div>
+<div id="dada2" class="section level2">
+<h2><strong>DADA2</strong></h2>
+<p>For each combination of forward and backwards <code>truncF</code> and <code>truncR</code> in the sourcefile, <code>waterway</code> will run the following DADA2-based analyses.</p>
+<p><br></p>
+<div id="qiime-dada2-denoise-paired" class="section level3">
+<h3>qiime dada2 denoise-paired</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="ex">qiime</span> dada2 denoise-paired \</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">    --i-demultiplexed-seqs <span class="va">$demuxpairedendpath</span> \</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">    --p-trim-left-f <span class="va">$trimF</span> \</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">    --p-trim-left-r <span class="va">$trimR</span> \</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">    --p-trunc-len-f <span class="va">$truncF</span> \</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">    --p-trunc-len-r <span class="va">$truncR</span> \</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">    --o-table <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/table.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">    --o-representative-sequences <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/rep-seqs.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">    --o-denoising-stats <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/denoising-stats.qza&quot;</span></a></code></pre></div>
+<p>The DADA2 denoising and pairing algorithm does both filtering and QC checking on the imported reads. The important steps are highlighted below:</p>
+<ol style="list-style-type: decimal">
+<li>Filtering</li>
+<li>Denoising</li>
+<li>Merging</li>
+<li>Chimera Detection</li>
+</ol>
+<p>Filtering and denoising both involve QC checking the reads and tossing any low-quality reads (low Phred quality scores or reads with Ns in the sequence). Merging involved matching the forward and reverse reads. It is important to note that the DADA2 algorithm requires at least a 20 base pair overlap between the forward and reverse reads, else it will not pair the reads and will toss them out. Lastly, chimera detection involves the detection and filtering of <a href="https://www.drive5.com/usearch/manual/chimeras.html">chimeric reads</a>.</p>
+<p>If no reads are outputted by the function, a “NoOutput.txt” file will be deposited in the directory instead, and the directory will be ignored by all following functions. The most common cause of this output is insufficient <code>truncF</code> and <code>truncR</code> length (not enough overlap between reads), followed by low-quality reads (all reads are low Phred quality, above max-accepted-EE, or contain 1 or more Ns).</p>
+<p>The function outputs three files: table.qza, rep-seqs.qza, and denoising-stats.qza</p>
+<p><a href="https://docs.qiime2.org/2019.10/plugins/available/dada2/denoise-paired/">Qiime 2 Documentation</a></p>
+<p><br></p>
+</div>
+<div id="summarization-functions-for-dada2" class="section level3">
+<h3>Summarization functions for DADA2</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="ex">qiime</span> feature-table summarize \</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">    --i-table <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/table.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">    --o-visualization <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/table.qzv&quot;</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">    </a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="ex">qiime</span> feature-table tabulate-seqs \</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">    --i-data <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/rep-seqs.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">  --o-visualization <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/rep-seqs.qzv&quot;</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="ex">qiime</span> metadata tabulate \</a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">    --m-input-file <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/denoising-stats.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11">    --o-visualization <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/denoising-stats.qzv&quot;</span></a></code></pre></div>
+<p>These three functions are grouped together due to their outputs of turning the three qza files (created previously in the DADA2 step) into viewable qzv files. The most relevant to immediately review is denoising-stats.qzv, which will show the number of reads that passed through each step of the DADA2 filtering process.</p>
+<p>These functions produce table.qzv, rep-seqs.qzv, and denoising-stats.qzv</p>
+<p><a href="https://docs.qiime2.org/2019.10/plugins/available/feature-table/summarize/">feature-table summarize documentation</a></p>
+<p><a href="https://docs.qiime2.org/2019.10/plugins/available/feature-table/tabulate-seqs/">feature-table tabulate-seqs documentation</a></p>
+<p><a href="https://docs.qiime2.org/2019.10/plugins/available/metadata/tabulate/">metadata tabulate documentation</a></p>
+<p><br><br></p>
+</div>
+</div>
+<div id="tree-generation" class="section level2">
+<h2><strong>Tree Generation</strong></h2>
+<p>For each combination of forward and backwards <code>truncF</code> and <code>truncR</code> in the sourcefile that have a DADA2 output (table.qza), <code>waterway</code> will run the following function.</p>
+<p><br></p>
+<div id="qiime-phylogeny-align-to-tree-mafft-fasttree" class="section level3">
+<h3>qiime phylogeny align-to-tree-mafft-fasttree</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="ex">qiime</span> phylogeny align-to-tree-mafft-fasttree \</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">    --i-sequences <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/rep-seqs.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">    --o-alignment <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/aligned-rep-seqs.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">    --o-masked-alignment <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/masked-aligned-rep-seqs.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">    --o-tree <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/unrooted-tree.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">    --o-rooted-tree <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/rooted-tree.qza&quot;</span></a></code></pre></div>
+<p>The phylogeny function creates both the unrooted-tree.qza and rooted-tree.qza that is used later in the analyses quite extensively.</p>
+<p><a href="https://docs.qiime2.org/2019.10/plugins/available/phylogeny/align-to-tree-mafft-fasttree/">Qiime 2 Documentation</a></p>
+<p><br><br></p>
+</div>
+</div>
+<div id="core-metrics-generation" class="section level2">
+<h2>Core-metrics generation</h2>
+<p>For each combination of forward and backwards <code>truncF</code> and <code>truncR</code> in the sourcefile that have a DADA2 output (table.qza), <code>waterway</code> will run the following functions.</p>
+<p><br></p>
+<div id="core-metrics-phylogenetic" class="section level3">
+<h3>core-metrics-phylogenetic</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="ex">qiime</span> diversity core-metrics-phylogenetic \</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">            --i-phylogeny <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/rooted-tree.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">            --i-table <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/table.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">            --p-sampling-depth <span class="va">$sampling_depth</span> \</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">            --m-metadata-file <span class="va">$metadata_filepath</span> \</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">            --output-dir <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/core-metrics-results&quot;</span></a></code></pre></div>
+<p>Using the rooted-tree.qza created during tree generation and table.qza created from DADA2 filtering, this function outputs a directory containing many different measures of sample diversity and distance (see the documentation for the full output).</p>
+<p><a href="https://docs.qiime2.org/2019.10/plugins/available/diversity/core-metrics-phylogenetic/">Qiime 2 Documentation</a></p>
+<p><br></p>
+</div>
+<div id="qiime-diversity-alpha-group-significance" class="section level3">
+<h3>qiime diversity alpha-group-significance</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="ex">qiime</span> diversity alpha-group-significance \</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">    --i-alpha-diversity <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/core_metrics_results/faith_pd_vector.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">    --m-metadata-file <span class="va">$metadata_filepath</span> \</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">    --o-visualization <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/core_metrics_results/faith_pd_group_significance.qzv&quot;</span></a></code></pre></div>
+<p>Uses the faith_pd_vector.qza created from core-metrics-phylogenetic to allow comparisons of alpha diversity values.</p>
+<p><a href="https://docs.qiime2.org/2019.10/plugins/available/diversity/alpha-group-significance/">Qiime 2 Documentation</a></p>
+<p><br></p>
+</div>
+<div id="qiime-diversity-alpha-rarefaction" class="section level3">
+<h3>qiime diversity alpha-rarefaction</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="ex">qiime</span> diversity alpha-rarefaction \</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">    --i-table <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/table.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">    --i-phylogeny <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/rooted-tree.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">    --p-max-depth <span class="va">$sampling_depth</span> \</a>
+<a class="sourceLine" id="cb9-5" data-line-number="5">    --m-metadata-file <span class="va">$metadata_filepath</span> \</a>
+<a class="sourceLine" id="cb9-6" data-line-number="6">    --o-visualization <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/alpha-rarefaction.qzv&quot;</span></a></code></pre></div>
+<p>Generates alpha rarefaction curves that can be interacted with. Data is additionally grouped according to metadata, and can be explored according to group.</p>
+<p><a href="https://docs.qiime2.org/2019.10/plugins/available/diversity/alpha-rarefaction/">Qiime 2 Documentation</a></p>
+<p><br></p>
+</div>
+</div>
+<div id="qiime-diversity-beta-group-significance" class="section level2">
+<h2>qiime diversity beta-group-significance</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="ex">qiime</span> diversity beta-group-significance \</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">    --i-distance-matrix <span class="st">&quot;</span><span class="va">${qzaoutput2}</span><span class="st">core_metrics_results/unweighted_unifrac_distance_matrix.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">    --m-metadata-file <span class="va">$metadata_filepath</span> \</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">    --m-metadata-column <span class="va">$beta_diversity_group</span> \</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">    --o-visualization <span class="st">&quot;</span><span class="va">${qzaoutput2}</span><span class="st">core_metrics_results/unweighted-unifrac-beta-significance.qzv&quot;</span> \</a>
+<a class="sourceLine" id="cb10-6" data-line-number="6">    --p-pairwise</a>
+<a class="sourceLine" id="cb10-7" data-line-number="7">            </a>
+<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="ex">qiime</span> diversity beta-group-significance \</a>
+<a class="sourceLine" id="cb10-9" data-line-number="9">    --i-distance-matrix <span class="st">&quot;</span><span class="va">${qzaoutput2}</span><span class="st">core_metrics_results/weighted_unifrac_distance_matrix.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb10-10" data-line-number="10">    --m-metadata-file <span class="va">$metadata_filepath</span> \</a>
+<a class="sourceLine" id="cb10-11" data-line-number="11">    --m-metadata-column <span class="va">$beta_diversity_group</span> \</a>
+<a class="sourceLine" id="cb10-12" data-line-number="12">    --o-visualization <span class="st">&quot;</span><span class="va">${qzaoutput2}</span><span class="st">core_metrics_results/weighted-unifrac-beta-significance.qzv&quot;</span> \</a>
+<a class="sourceLine" id="cb10-13" data-line-number="13">    --p-pairwise</a></code></pre></div>
+<p>Determines whether groups of samples are significantly different from one another, spanning the previously produced unweighted and weighted unifrac distance matrices.</p>
+<p><a href="https://docs.qiime2.org/2019.10/plugins/available/diversity/beta-group-significance/">Qiime 2 Documentation</a></p>
+<p><br><br></p>
+</div>
+<div id="taxonomic-labelling" class="section level2">
+<h2><strong>Taxonomic labelling</strong></h2>
+<p>For each combination of forward and backwards <code>truncF</code> and <code>truncR</code> in the sourcefile that have a DADA2 output (table.qza), <code>waterway</code> will run the following functions.</p>
+<p>IMPORTANT NOTE: sk-learn requires a classifier trained on the version of of qiime being ran. Classifiers for two versions of qiime2 are available on the <a href="http://marqueslab.erc.monash.edu/home/michael/waterway_docs/QYyBgctVnjnFvSFij7qJrMul6/links.html">useful links page</a>, both trained on 99% coverage Greengenes database files. Otherwise, you can use the <code>-c</code> option with waterway to generate a classifier file for your version of Qiime 2, described <a href="http://marqueslab.erc.monash.edu/home/michael/waterway_docs/QYyBgctVnjnFvSFij7qJrMul6/tc.html">here</a>.</p>
+<p><br></p>
+<div id="qiime-feature-classifier-classify-sklearn" class="section level3">
+<h3>qiime feature-classifier classify-sklearn</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="ex">qiime</span> feature-classifier classify-sklearn \</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">    --i-classifier <span class="va">$classifierpath</span> \</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">    --i-reads <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/rep-seqs.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">    --o-classification <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/taxonomy.qza&quot;</span></a></code></pre></div>
+<p>Using the classifier given, this function creates taxonomy.qza, containing reads grouped into taxons.</p>
+<p><a href="https://toolshed.g2.bx.psu.edu/repository/display_tool?repository_id=a43ea4908816827c&amp;render_repository_actions_for=tool_shed&amp;tool_config=%2Fsrv%2Ftoolshed%2Fmain%2Fvar%2Fdata%2Frepos%2F003%2Frepo_3930%2Fqiime2%2Fqiime_feature-classifier_classify-sklearn.xml&amp;changeset_revision=51b9b6b57732">Qiime 2 Documentation</a></p>
+<p><br></p>
+</div>
+<div id="qiime-metadata-tabulate" class="section level3">
+<h3>qiime metadata tabulate</h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="ex">qiime</span> metadata tabulate \</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">    --m-input-file <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/taxonomy.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">    --o-visualization <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/taxonomy.qzv&quot;</span></a></code></pre></div>
+<p>This turns the taxonomy.qza created in <code>sk-learn</code> into a Qiime 2 View readable qzv file.</p>
+<p><a href="https://docs.qiime2.org/2019.10/plugins/available/metadata/tabulate/">Qiime 2 Documentation</a></p>
+<p><br></p>
+</div>
+<div id="qiime-taxa-barplot" class="section level3">
+<h3>qiime taxa barplot</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="ex">qiime</span> taxa barplot \</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">    --i-table <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/table.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">    --i-taxonomy <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/taxonomy.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">    --m-metadata-file <span class="va">$metadata_filepath</span> \</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5">    --o-visualization <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/taxa-bar-plots.qzv&quot;</span></a></code></pre></div>
+<p>This outputs taxa-bar-plots.qzv, a file containing viewable bar graphs showing percentages of prominent taxa per sample. The samples can be grouped by metadata as well.</p>
+<p><a href="https://toolshed.g2.bx.psu.edu/repository/display_tool?repository_id=a43ea4908816827c&amp;render_repository_actions_for=tool_shed&amp;tool_config=%2Fsrv%2Ftoolshed%2Fmain%2Fvar%2Fdata%2Frepos%2F003%2Frepo_3930%2Fqiime2%2Fqiime_taxa_barplot.xml&amp;changeset_revision=51b9b6b57732">Qiime 2 Documentation</a></p>
+<p><br><br></p>
+</div>
+</div>
+<div id="optional-analyses" class="section level2">
+<h2><strong>Optional Analyses</strong></h2>
+<p>Whether optional analyses will run is dictated by variables set in optional_analyses.txt. If any are set to true, they will run for each combination of <code>truncF</code> and <code>truncR</code>. Optional analyses <strong>must</strong> be run only after taxonomic analysis has been completed for the dataset.</p>
+<p>All optional analyses will output their files into their (automatically created) own folder, located in the truncF-truncR folder containing all other analyses.</p>
+<p>Both Ancom and PCoA analyses follow the procedure outlined <a href="https://rachaellappan.github.io/VL-QIIME2-analysis/additional-analyses.html">here</a>, outlined by Rachael Lappan.</p>
+<p><br></p>
+<div id="ancom-analyses" class="section level3">
+<h3><strong>Ancom Analyses</strong></h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="ex">qiime</span> feature-table filter-features \</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">    --i-table <span class="st">&quot;</span><span class="va">${qzaoutput2}</span><span class="st">table.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">    --p-min-samples 2 \</a>
+<a class="sourceLine" id="cb14-4" data-line-number="4">    --o-filtered-table <span class="st">&quot;</span><span class="va">${qzaoutput2}</span><span class="st">ancom_outputs/temp.qza&quot;</span></a>
+<a class="sourceLine" id="cb14-5" data-line-number="5">            </a>
+<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="ex">qiime</span> feature-table filter-features \</a>
+<a class="sourceLine" id="cb14-7" data-line-number="7">    --i-table <span class="st">&quot;</span><span class="va">${qzaoutput2}</span><span class="st">ancom_outputs/temp.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb14-8" data-line-number="8">    --p-min-frequency 10 \</a>
+<a class="sourceLine" id="cb14-9" data-line-number="9">    --o-filtered-table <span class="st">&quot;</span><span class="va">${qzaoutput2}</span><span class="st">ancom_outputs/filtered_table.qza&quot;</span></a>
+<a class="sourceLine" id="cb14-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb14-11" data-line-number="11"><span class="ex">qiime</span> taxa collapse \</a>
+<a class="sourceLine" id="cb14-12" data-line-number="12">    --i-table <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/filtered_table.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb14-13" data-line-number="13">    --i-taxonomy <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/taxonomy.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb14-14" data-line-number="14">    --p-level <span class="va">$collapse_taxa_to_level</span> \</a>
+<a class="sourceLine" id="cb14-15" data-line-number="15">    --o-collapsed-table <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/ancom_outputs/genus.qza&quot;</span></a>
+<a class="sourceLine" id="cb14-16" data-line-number="16">            </a>
+<a class="sourceLine" id="cb14-17" data-line-number="17"><span class="ex">qiime</span> composition add-pseudocount \</a>
+<a class="sourceLine" id="cb14-18" data-line-number="18">    --i-table <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/ancom_outputs/genus.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb14-19" data-line-number="19">    --o-composition-table <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/ancom_outputs/added_pseudo.qza&quot;</span></a>
+<a class="sourceLine" id="cb14-20" data-line-number="20">        </a>
+<a class="sourceLine" id="cb14-21" data-line-number="21"><span class="ex">qiime</span> composition ancom \</a>
+<a class="sourceLine" id="cb14-22" data-line-number="22">    --i-table <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/ancom_outputs/added_pseudo.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb14-23" data-line-number="23">    --m-metadata-file <span class="va">$metadata_filepath</span> \</a>
+<a class="sourceLine" id="cb14-24" data-line-number="24">    --m-metadata-column <span class="va">$group_to_compare</span> \</a>
+<a class="sourceLine" id="cb14-25" data-line-number="25">    --o-visualization <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/ancom_outputs/ancom_group.qzv&quot;</span></a></code></pre></div>
+<p>The first two functions filter the original feature table to exclude OTUs that appear in only one sample, or have less than 10 reads across all samples (as detailed <a href="https://forum.qiime2.org/t/ancom-giving-strange-w-values/1002/9">here</a>).</p>
+<p>The taxa collapse function collapses all taxa information down to the level specified in the <code>collapse_taxa_to_level</code>, then outputs a featuretable called genus.qza. Pseudocounts are added to take out any 0s in the data, as 0 can’t be log transformed. Finally, the actual ANCOM analysis is run.</p>
+<p><br></p>
+</div>
+<div id="pcoa-biplot" class="section level3">
+<h3><strong>PCoA Biplot</strong></h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="ex">qiime</span> feature-table rarefy \</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">    --i-table <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/table.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">    --p-sampling-depth <span class="va">$sampling_depth</span> \</a>
+<a class="sourceLine" id="cb15-4" data-line-number="4">    --o-rarefied-table <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/biplot_outputs/rarefied_table.qza&quot;</span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="ex">qiime</span> diversity beta </a>
+<a class="sourceLine" id="cb15-7" data-line-number="7">    <span class="ex">--i-table</span> <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/biplot_outputs/rarefied_table.qza&quot;</span></a>
+<a class="sourceLine" id="cb15-8" data-line-number="8">    <span class="ex">--p-metric</span> braycurtis </a>
+<a class="sourceLine" id="cb15-9" data-line-number="9">    <span class="ex">--o-distance-matrix</span> <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/biplot_outputs/braycurtis_div.qza&quot;</span></a>
+<a class="sourceLine" id="cb15-10" data-line-number="10">    </a>
+<a class="sourceLine" id="cb15-11" data-line-number="11"><span class="ex">qiime</span> diversity pcoa \</a>
+<a class="sourceLine" id="cb15-12" data-line-number="12">    --i-distance-matrix <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/biplot_outputs/braycurtis_div.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb15-13" data-line-number="13">    --p-number-of-dimensions <span class="va">$number_of_dimensions</span> \</a>
+<a class="sourceLine" id="cb15-14" data-line-number="14">    --o-pcoa <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/biplot_outputs/braycurtis_pcoa.qza&quot;</span></a>
+<a class="sourceLine" id="cb15-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb15-16" data-line-number="16"><span class="ex">qiime</span> feature-table relative-frequency \</a>
+<a class="sourceLine" id="cb15-17" data-line-number="17">    --i-table <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/alpha-rarefaction.qzv&quot;</span> \</a>
+<a class="sourceLine" id="cb15-18" data-line-number="18">    --o-relative-frequency-table <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/biplot_outputs/rarefied_table_relative.qza&quot;</span></a>
+<a class="sourceLine" id="cb15-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb15-20" data-line-number="20"><span class="ex">qiime</span> diversity pcoa-biplot \</a>
+<a class="sourceLine" id="cb15-21" data-line-number="21">    --i-pcoa <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/biplot_outputs/braycurtis_pcoa.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb15-22" data-line-number="22">    --i-features <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/biplot_outputs/rarefied_table_relative.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb15-23" data-line-number="23">    --o-biplot <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/biplot_outputs/biplot_matrix_unweighted_unifrac.qza&quot;</span></a>
+<a class="sourceLine" id="cb15-24" data-line-number="24"></a>
+<a class="sourceLine" id="cb15-25" data-line-number="25"><span class="ex">qiime</span> emperor biplot \</a>
+<a class="sourceLine" id="cb15-26" data-line-number="26">    --i-biplot <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/biplot_outputs/biplot_matrix_unweighted_unifrac.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb15-27" data-line-number="27">    --m-sample-metadata-file <span class="va">$metadata_filepath</span> \</a>
+<a class="sourceLine" id="cb15-28" data-line-number="28">    --m-feature-metadata-file <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/taxonomy.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb15-29" data-line-number="29">    --o-visualization <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/biplot_outputs/unweighted_unifrac_emperor_biplot.qzv&quot;</span></a></code></pre></div>
+<p>The PCoA biplot produces an emperor plot showing the taxa that are most strongly contributing to the variance on a PCoA plot. The first three functions create a feature table with the relative frequency of each OTU, while the fourth actually produces the biplot in .qza form. The last function is used to create a visualization.</p>
+<p><br></p>
+</div>
+<div id="picrust2-analysis" class="section level3">
+<h3><strong>Picrust2 Analysis</strong></h3>
+<p>The q2-picrust2 plugin has to be <a href="https://library.qiime2.org/plugins/q2-picrust2/13/">manually installed</a> into the Qiime2 environment.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="ex">qiime</span> picrust2 full-pipeline \</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">    --i-table <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/table.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">    --i-seq <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/rep-seqs.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb16-4" data-line-number="4">    --output-dir <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/q2-picrust2_output&quot;</span> \</a>
+<a class="sourceLine" id="cb16-5" data-line-number="5">    --p-hsp-method <span class="va">$hsp_method</span> \</a>
+<a class="sourceLine" id="cb16-6" data-line-number="6">    --p-max-nsti <span class="va">$max_nsti</span> \</a>
+<a class="sourceLine" id="cb16-7" data-line-number="7">    --verbose</a>
+<a class="sourceLine" id="cb16-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb16-9" data-line-number="9"><span class="ex">qiime</span> feature-table summarize \</a>
+<a class="sourceLine" id="cb16-10" data-line-number="10">    --i-table <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/q2-picrust2_output/pathway_abundance.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb16-11" data-line-number="11">    --o-visualization <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/q2-picrust2_output/pathway_abundance.qzv&quot;</span></a>
+<a class="sourceLine" id="cb16-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb16-13" data-line-number="13"><span class="ex">qiime</span> feature-table summarize \</a>
+<a class="sourceLine" id="cb16-14" data-line-number="14">    --i-table <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/q2-picrust2_output/ko_metagenome.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb16-15" data-line-number="15">    --o-visualization <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/q2-picrust2_output/ko_metagenome.qzv&quot;</span></a>
+<a class="sourceLine" id="cb16-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb16-17" data-line-number="17"><span class="ex">qiime</span> feature-table summarize \</a>
+<a class="sourceLine" id="cb16-18" data-line-number="18">  --i-table <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/q2-picrust2_output/ec_metagenome.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb16-19" data-line-number="19">    --o-visualization <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/}q2-picrust2_output/ec_metagenome.qzv&quot;</span></a>
+<a class="sourceLine" id="cb16-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb16-21" data-line-number="21"><span class="ex">qiime</span> diversity core-metrics \</a>
+<a class="sourceLine" id="cb16-22" data-line-number="22">    --i-table <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/q2-picrust2_output/pathway_abundance.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb16-23" data-line-number="23">    --p-sampling-depth <span class="va">$sampling_depth</span> \</a>
+<a class="sourceLine" id="cb16-24" data-line-number="24">  --m-metadata-file <span class="va">$metadata_filepath</span> \</a>
+<a class="sourceLine" id="cb16-25" data-line-number="25">  --output-dir <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/q2-picrust2_output/pathabun_core_metrics&quot;</span></a></code></pre></div>
+<p>The Picrust2 pipeline is a popular method to analyze bacterial pathway abudances in 16S microbiome data. For more information on these outputs, look at the tutorial <a href="https://github.com/picrust/picrust2/wiki/q2-picrust2-Tutorial">here</a>.</p>
+<p><br></p>
+</div>
+<div id="deicode-analysis" class="section level3">
+<h3><strong>DEICODE Analysis</strong></h3>
+<p>The DEICODE plugin has to be <a href="https://library.qiime2.org/plugins/deicode/19/">manually installed</a> into the Qiime2 environment.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="ex">qiime</span> deicode rpca \</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">    --i-table <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/table.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">    --p-min-feature-count <span class="va">$min_feature_count</span> \</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4">    --p-min-sample-count <span class="va">$min_sample_count</span> \</a>
+<a class="sourceLine" id="cb17-5" data-line-number="5">    --o-biplot <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/deicode_outputs/ordination.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb17-6" data-line-number="6">    --o-distance-matrix <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/deicode_outputs/distance.qza&quot;</span></a>
+<a class="sourceLine" id="cb17-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb17-8" data-line-number="8"><span class="ex">qiime</span> emperor biplot \</a>
+<a class="sourceLine" id="cb17-9" data-line-number="9">    --i-biplot <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/deicode_outputs/ordination.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb17-10" data-line-number="10">    --m-sample-metadata-file <span class="va">$metadata_filepath</span> \</a>
+<a class="sourceLine" id="cb17-11" data-line-number="11">    --m-feature-metadata-file <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/taxonomy.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb17-12" data-line-number="12">    --o-visualization <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/deicode_outputs/biplot.qzv&quot;</span> \</a>
+<a class="sourceLine" id="cb17-13" data-line-number="13">    --p-number-of-features <span class="va">$num_of_features</span></a>
+<a class="sourceLine" id="cb17-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb17-15" data-line-number="15"><span class="ex">qiime</span> diversity beta-group-significance \</a>
+<a class="sourceLine" id="cb17-16" data-line-number="16">    --i-distance-matrix <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/deicode_outputs/distance.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb17-17" data-line-number="17">    --m-metadata-file <span class="va">$metadata_filepath</span> \</a>
+<a class="sourceLine" id="cb17-18" data-line-number="18">    --m-metadata-column <span class="va">$group</span> \</a>
+<a class="sourceLine" id="cb17-19" data-line-number="19">    --p-method permanova \</a>
+<a class="sourceLine" id="cb17-20" data-line-number="20">    --o-visualization <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/deicode_outputs/PERMANOVAs/</span><span class="va">${group}</span><span class="st">-permanova.qzv&quot;</span></a></code></pre></div>
+<p>DEICODE is a PCA analysis of sample clustering with regards to different taxa in the samples, and is very robust in regards to high levels of sparcity. The final PERMANOVA is a statistical measure of whether the metadata column (group) chosen explains the sample clustering in the biplot produced.</p>
+<p><br></p>
+</div>
+<div id="gneiss-analysis" class="section level3">
+<h3><strong>Gneiss Analysis</strong></h3>
+<p>NOTE: As of Qiime2 version 2020.2, the Gneiss functions <code>ols_regression</code>, <code>balance_taxonomy</code>, and <code>lme_regression</code> have been <a href="https://forum.qiime2.org/t/qiime-2-2020-2-is-now-available/13822">removed</a> in favor of <a href="https://github.com/biocore/songbird">songbird/aldex2</a>, which has not been incorporated into Qiime2. I’ve left this option in <code>waterway</code> in case these functions are reincorporated in future versions of gneiss in Qiime2, or if users want to run gneiss analysis using an older version of Qiime2.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="ex">qiime</span> gneiss gradient-clustering \</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">    --i-table <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/table.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb18-3" data-line-number="3">    --m-gradient-file <span class="va">$metadata_filepath</span> \</a>
+<a class="sourceLine" id="cb18-4" data-line-number="4">    --m-gradient-column <span class="va">$gradient_column</span> \</a>
+<a class="sourceLine" id="cb18-5" data-line-number="5">    --o-clustering <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/gneiss_outputs/gradient-hierarchy.qza&quot;</span></a>
+<a class="sourceLine" id="cb18-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb18-7" data-line-number="7"><span class="ex">qiime</span> gneiss ilr-hierarchical \</a>
+<a class="sourceLine" id="cb18-8" data-line-number="8">    --i-table <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/table.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb18-9" data-line-number="9">    --i-tree <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/gneiss_outputs/gradient-hierarchy.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb18-10" data-line-number="10">    --o-balances <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/gneiss_outputs/balances.qza&quot;</span></a>
+<a class="sourceLine" id="cb18-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb18-12" data-line-number="12"><span class="ex">qiime</span> gneiss ols-regression \</a>
+<a class="sourceLine" id="cb18-13" data-line-number="13">    --p-formula <span class="va">$gradient_column</span> \</a>
+<a class="sourceLine" id="cb18-14" data-line-number="14">    --i-table <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/gneiss_outputs/balances.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb18-15" data-line-number="15">    --i-tree <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/gneiss_outputs/gradient-hierarchy.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb18-16" data-line-number="16">    --m-metadata-file <span class="va">$metadata_filepath</span> \</a>
+<a class="sourceLine" id="cb18-17" data-line-number="17">    --o-visualization <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/gneiss_outputs/regression_summary_pCG.qzv&quot;</span></a>
+<a class="sourceLine" id="cb18-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb18-19" data-line-number="19"><span class="ex">qiime</span> gneiss dendrogram-heatmap \</a>
+<a class="sourceLine" id="cb18-20" data-line-number="20">    --i-table <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/table.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb18-21" data-line-number="21">    --i-tree <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/gneiss_outputs/gradient-hierarchy.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb18-22" data-line-number="22">    --m-metadata-file <span class="va">$metadata_filepath</span> \</a>
+<a class="sourceLine" id="cb18-23" data-line-number="23">    --m-metadata-column <span class="va">$gradient_column_categorical</span> \</a>
+<a class="sourceLine" id="cb18-24" data-line-number="24">    --p-color-map <span class="st">&#39;seismic&#39;</span> \</a>
+<a class="sourceLine" id="cb18-25" data-line-number="25">    --o-visualization <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/gneiss_outputs/heatmap_pCG.qzv&quot;</span></a>
+<a class="sourceLine" id="cb18-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb18-27" data-line-number="27"><span class="ex">qiime</span> gneiss balance-taxonomy \</a>
+<a class="sourceLine" id="cb18-28" data-line-number="28">    --i-table <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/table.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb18-29" data-line-number="29">    --i-tree <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/gneiss_outputs/gradient-hierarchy.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb18-30" data-line-number="30">    --i-taxonomy <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/taxonomy.qza&quot;</span> \</a>
+<a class="sourceLine" id="cb18-31" data-line-number="31">    --p-taxa-level <span class="va">$taxa_level</span> \</a>
+<a class="sourceLine" id="cb18-32" data-line-number="32">    --p-balance-name <span class="va">$balance_name</span> \</a>
+<a class="sourceLine" id="cb18-33" data-line-number="33">    --m-metadata-file <span class="va">$metadata_filepath</span> \</a>
+<a class="sourceLine" id="cb18-34" data-line-number="34">    --m-metadata-column <span class="va">$gradient_column_categorical</span> \</a>
+<a class="sourceLine" id="cb18-35" data-line-number="35">    --o-visualization <span class="st">&quot;</span><span class="va">${qzaoutput}${truncF}</span><span class="st">-</span><span class="va">${truncR}</span><span class="st">/gneiss_outputs/</span><span class="va">${balance_name}</span><span class="st">_taxa_summary_</span><span class="va">${gradient_column_categorical}</span><span class="st">_level_</span><span class="va">${taxa_level}</span><span class="st">.qzv&quot;</span></a></code></pre></div>
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

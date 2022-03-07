@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>waterway</title>
+
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">waterway</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="tut.html">Walkthrough</a>
+</li>
+<li>
+  <a href="runtime_options.html">Runtime Options</a>
+</li>
+<li>
+  <a href="fn.html">Functions Included</a>
+</li>
+<li>
+  <a href="config.html">Understanding config.txt</a>
+</li>
+<li>
+  <a href="rerunning.html">Optional Analyses</a>
+</li>
+<li>
+  <a href="vh.html">Version History</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">waterway</h1>
+
+</div>
+
+
+<p>Last updated: 2020-08-07</p>
+<p><br></p>
+<div id="requirements-for-running-waterway" class="section level2">
+<h2><strong>Requirements for running waterway</strong></h2>
+<p>To access the main functions included in <code>waterway</code>, you need the following:</p>
+<ul>
+<li>A command line <a href="https://qiime2.org/">Qiime2 installation</a> via a Conda environment (refer to the <a href="https://docs.qiime2.org/2021.4/install/native/">Qiime2 installation tutorial here</a>)</li>
+<li>An installation of the <a href="https://www.r-project.org/">R language</a> (at least version 4.0.1), with the following libraries:
+<ul>
+<li><a href="https://www.tidyverse.org/">Tidyverse</a></li>
+<li><a href="https://github.com/joey711/phyloseq#quick-install">Phyloseq</a></li>
+<li><a href="https://github.com/jbisanz/qiime2R#installing-qiime2r">qiime2R</a></li>
+<li><a href="https://github.com/Rdatatable/data.table#installation">data.table</a></li>
+</ul></li>
+</ul>
+<p>In addition, some optional Qiime2 plugins are supported by <code>waterway</code>:</p>
+<ul>
+<li><a href="https://library.qiime2.org/plugins/q2-picrust2/13/">Picrust2</a></li>
+<li><a href="https://library.qiime2.org/plugins/deicode/19/">DEICODE</a></li>
+<li><a href="https://github.com/biocore/songbird">Songbird</a></li>
+</ul>
+<p><br></p>
+</div>
+<div id="enable-waterway-as-a-command" class="section level2">
+<h2><strong>Enable waterway as a command</strong></h2>
+<p>Once <code>waterway</code> has been downloaded from <a href="https://github.com/michael-nakai/waterway">Github</a>, run the following commands:</p>
+<pre><code>unzip waterway-master
+cd waterway-master
+chmod 700 waterway.bash
+./waterway.bash --add-waterway</code></pre>
+<p>You should be prompted to add <code>waterway</code> as a command to your <code>.bashrc</code> file. Accept by typing <code>y</code>. <strong>After accepting, please do not move the waterway folder.</strong></p>
+<p><br></p>
+</div>
+<div id="importing-the-fastq-files" class="section level2">
+<h2><strong>Importing the Fastq files</strong></h2>
+<p>First, activate a <a href="https://docs.qiime2.org/2020.6/install/native/">Qiime2 environment through Conda</a>. Make a new folder to run waterway in, then run <code>waterway</code> once to generate the config files. For example:</p>
+<pre><code>mkdir waterway_config
+cd waterway_config
+waterway</code></pre>
+<p>This will generate two files in the folder waterway_config: <code>config.txt</code> and <code>optional_analyses.txt</code>. Everytime <code>waterway</code> runs, it reads data from a config and optional analyses file specific to one dataset. Whenever we run <code>waterway</code> from now on, we can specify the location of the config file we want <code>waterway</code> to read from. This way, we can keep multiple config files for different datasets in different folders without problem.</p>
+<p>The only file we need to edit for now is <code>config.txt</code>, so open the file in your preferred editor. The first five lines should look like this:</p>
+<pre><code>#Filepaths here
+projpath=/home/username/folder with raw-data, metadata, and outputs folders/
+filepath=/home/username/folder with raw-data, metadata, and outputs folders/raw-data
+qzaoutput=/home/username/folder with raw-data, metadata, and outputs folders/outputs/
+metadata_filepath=/home/username/folder with raw-data, metadata, and outputs folders/metadata/metadata.tsv</code></pre>
+<p>Any line starting with a <code>#</code> is ignored in <code>config.txt</code> and <code>optional_analyses.txt</code>, and are used to delimit option blocks (making it easier to read). In lines 2-5, we see configs that we need to set. When inputting filepaths or changing configs, always change the text to the <strong>right</strong> of the equals.</p>
+<p>In our case, let’s imagine that our folder structure looks like the following:</p>
+<pre><code>                                |---- raw_fastq_data/ ---- lots of fastq files here
+                                |
+                                |---- metadata/ ---------- metadata.tsv
+/home/user/project_folder/  ----|
+                                |---- waterway_config/ --- config.txt
+                                |                      |
+                                |                      |-- optional_analyses.txt
+                                |---- outputs/</code></pre>
+<p>The <code>projpath</code> on line 2 of <code>config.txt</code> refers to the overarching folder containing all dataset subfolders and files. In our case, this is <code>/home/user/project_folder/</code>.</p>
+<p>The <code>filepath</code> on line 3 refers to the folder containing all our raw fastq files, or <code>/home/user/project_folder/raw_fastq_data/</code>.</p>
+<p>The <code>qzaoutput</code> on line 4 refers to the folder we want waterway to output all analysis files. It is strongly recommended that this is an empty folder. In our case, this is <code>/home/user/project_folder/outputs/</code>.</p>
+<p>The <code>metadata_filepath</code> on line 5 refers to the <a href="https://docs.qiime2.org/2020.6/tutorials/metadata/">Qiime2-compatible metadata file</a> for our entire dataset, or <code>/home/user/project_folder/metadata/metadata.tsv</code>.</p>
+<p>Save the config file, then continue to the next section if you need to make a manifest file for your data. Otherwise, skip the next section and go directly to <strong>Importing the data into a Qiime2-readable format</strong></p>
+<p><br></p>
+<div id="making-a-manifest-file-for-your-fastq-files" class="section level3">
+<h3><strong>Making a manifest file for your Fastq files</strong></h3>
+<p>If your fastq files are not in a Qiime2-compatible filename format, then you’ll need to make a manifest file. A manifest file is a three-column file which has the sampleID, the filepath to the FastQ file containing the forwards reads, and the filepath to the reverse reads. <code>waterway</code> can automatically generate this manifest file if the <code>filepath</code> variable in the config file has been set.</p>
+<p>When generating a manifest file, Fastq files must be distinguished for forward and reverse reads for all samples. Ideally, all files containing forward reads should be distinguished by a trailing <code>R1</code> in the filename, with reverse read files distinguished with an <code>R2</code>. This follows the conventional Casava 1.8 formatted standard output from Illumina machines. If your files follow a different pattern though, this can be changed in <code>config.txt</code>, under the variables called <code>FPattern</code> and <code>RPattern</code>.</p>
+<p>Once the forward and reverse reads have been distinguished, making the manifest file is a simple operation of:</p>
+<p><code>waterway . -M</code></p>
+<p>This will create a file called <code>manifest.tsv</code> in the folder containing the <code>config.txt</code> file. The variable called <code>manifest</code> in <code>config.txt</code> should now be set to the path to <code>manifest.tsv</code>.</p>
+<p><br></p>
+</div>
+<div id="importing-the-data-into-a-qiime2-readable-format" class="section level3">
+<h3><strong>Importing the data into a Qiime2-readable format</strong></h3>
+<p>To import the data WITHOUT using a manifest file, first navigate to the folder containing <code>config.txt</code> and run the command: <code>waterway .</code></p>
+<p>To import the data WITH a manifest file, first navigate to the folder containing <code>config.txt</code> and run the command: <code>waterway . -m</code></p>
+<p>Once the data has been imported, you should see the console say “Finished import block” in green, and the files <code>imported_seqs.qza</code> and <code>imported_seqs.qzv</code> should be created in the folder specified in the variable <code>qzaoutput</code>.</p>
+<p><br></p>
+</div>
+</div>
+<div id="finding-the-trimming-and-truncation-lengths-for-dada2" class="section level2">
+<h2><strong>Finding the trimming and truncation lengths for DADA2</strong></h2>
+<p>To find the optimal trimming/truncation lengths, first open <code>imported_seqs.qzv</code> in <a href="https://view.qiime2.org/">Qiime2View</a>. As a general rule of thumb, you want the forward and reverse trimming lengths to be identical (usually at around 6), while truncation lengths should differ between forward and reverse reads. Forward reads generally have a longer truncation point, due to their overall slightly better quality scores. The threshhold for a “good” quality score is generally around 20, although this can vary.</p>
+<p>Once the forward and reverse trimming/truncation lengths have been found, open <code>config.txt</code> and add in the respective numbers into <code>trimF</code>, <code>trimR</code>, <code>truncF</code>, and <code>truncR</code>. Note that you can choose multiple truncation lengths to test at this point, and waterway will try all possible combinations of truncF-truncR lengths. For example, if we wanted to test out both a forward truncation value of 221 and 232, as well as a reverse truncation value of 198 and 201, the config file would read:</p>
+<pre><code>truncF=(221 232)
+truncR=(198 201)</code></pre>
+<p><code>waterway</code> would then try out all four possible truncF-truncR combinations, and analysis will be run on all of them. At this point, our <code>outputs</code> folder would now contain four new folders: <code>221-198</code>, <code>221-201</code>, <code>232-198</code>, and <code>232-201</code>. We can then survey the results in each folder, and delete the three that we don’t need anymore. Note that if DADA2 is unable to pass any reads using a truncF-truncR combination, a text file called <code>NoOutputs.txt</code> will be created in the truncation combination that didn’t work, and <code>waterway</code> will ignore that combination for all subsequent steps.</p>
+<p><br></p>
+<div id="running-dada2" class="section level3">
+<h3><strong>Running DADA2</strong></h3>
+<p>Once our trimming and truncation lengths have been determined and added to the config file, DADA2 can be run by simply using the <code>waterway</code> command. <code>waterway</code> will automatically stop after DADA2 has been completed on all truncF-truncR combinations.</p>
+<p><br></p>
+</div>
+</div>
+<div id="finding-an-optimal-sampling-depth" class="section level2">
+<h2><strong>Finding an optimal sampling depth</strong></h2>
+<p>Once the execution of <code>waterway</code> has stopped and DADA2 has completed, we can view the file called <code>denoising-stats.qzv</code> in the <code>outputs</code> folder in <a href="https://view.qiime2.org/">Qiime2View</a>. The objective now is to find an optimal sampling depth. The sampling depth refers to the threshhold we can choose to rarefy all samples down to. Rarefying is the process of randomly sampling a certain number of reads from each sample. To visualize this, let us assume we have the following samples which have variable numbers of denoised reads:</p>
+<pre><code>Sample Name   Denoised Reads
+-------------------------------
+ Sample-1         20,000
+ Sample-2         25,000
+ Sample-3         30,000
+ Sample-4         50,000</code></pre>
+<p>In the above case, if we rarefy to 20,000 reads, Sample-1 would exist as-is. However, Sample-2/3/4 will have 20,000 reads randomly chosen, and will end up containing 20,000 reads each. If we decide to rarefy to 30,000 reads, Sample-1/2 would be excluded as they both have less than 30,000 reads total, while Sample-4 would be rarefied down to 30,000 reads.</p>
+<p>For 16S analysis, it is generally recommended to have the sampling depth exceed 20,000 reads at minimum.</p>
+<p>Once the sampling depth has been determined, it should be entered into <code>config.txt</code> under the variable <code>sampling depth</code>.</p>
+<p><br></p>
+<div id="identify-a-group-to-compare-beta-diversities-between" class="section level3">
+<h3><strong>Identify a group to compare beta diversities between</strong></h3>
+<p>A group to compare beta diversity values between can be designated in <code>config.txt</code> under the variable <code>beta_diversity_group</code>. Note that further beta diversity comparisons can be done after <code>waterway</code> completes the initial analyses, by looking in <code>optional_analyses.txt</code>.</p>
+<p>If missing metadata is labelled with a certain string (such as “NotAvailable”) in <code>metadata.txt</code>, designate it under the variable <code>missing_samples</code>. Otherwise, designate <code>missing_samples</code> with the string “SDLFKJAWEOIJREWR”, or other nonsensical strings that don’t appear in your metadata.</p>
+<p><br></p>
+</div>
+</div>
+<div id="designating-a-classifier-database" class="section level2">
+<h2><strong>Designating a classifier database</strong></h2>
+<p>Before <code>waterway</code> can be run once again, a classifier file must be designated. A classifier file lets QIIME2 label the DNA reads with taxonomic labels, i.e. it allows us to know how many species of microbes we detect in each sample, and how many microbes per specie we’ve found.</p>
+<p>Classifiers can be found on the <a href="https://docs.qiime2.org/2021.2/data-resources/">Qiime2 classifier file list here</a>. <strong>Note that classifier files are specific to your Qiime2 version</strong>. Designate the location of the classifier file in <code>config.txt</code> under the variable <code>classifierpath</code>.</p>
+<p>Once all variables are designated, <code>waterway</code> can be run again, and should complete all main analyses.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Optional Analyses</title>
+
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">waterway</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="tut.html">Walkthrough</a>
+</li>
+<li>
+  <a href="runtime_options.html">Runtime Options</a>
+</li>
+<li>
+  <a href="fn.html">Functions Included</a>
+</li>
+<li>
+  <a href="config.html">Understanding config.txt</a>
+</li>
+<li>
+  <a href="rerunning.html">Optional Analyses</a>
+</li>
+<li>
+  <a href="vh.html">Version History</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Optional Analyses</h1>
+
+</div>
+
+
+<p>By changing variables from <code>false</code> to <code>true</code> in optional_analyses.txt, <code>waterway</code> can rerun specific code blocks and analyses without having to run a whole reanalysis.</p>
+<p>Keep in mind that the <strong>outputs from most analyses will overwrite any files with the same name in the output folder.</strong> To avoid this, move all the files that would be overwritten into a seperate folder.</p>
+<p>For more information on specific code and Qiime2 commands, search the “Functions Included” page for the commands listed in the code block.</p>
+<p><br></p>
+<div id="extended-alpha-diversity-metrics-non-rarefied" class="section level2">
+<h2>Extended alpha diversity metrics (non-rarefied)</h2>
+<p>Setting <code>extended_alpha</code> to <code>true</code> calculates multiple different alpha diversity metrics for the dataset. This will output all QIIME2 files in a folder named “alpha_diversities” in the post-DADA2 outputs folder. The types of alpha diversity calculated include: ace, berger_parker_d, brillouin_d, chao1, chao1_ci, dominance, doubles, enspie, esty_ci, fisher_alpha, gini_index, goods_coverage, heip_e, kempton_taylor_q, lladser_ci, lladser_pe, margalef, mcintosh_d, mcintosh_e, menhinick, observed_otus, osd, pielou_e, robbins, shannon, simpson, simpson_e, singles, and strong. For documentation on the main commands, look <a href="https://forum.qiime2.org/t/alpha-and-beta-diversity-explanations-and-commands/2282">here</a>.</p>
+<p><br></p>
+</div>
+<div id="beta-diversity-comparisons" class="section level2">
+<h2>Beta diversity comparisons</h2>
+<p>If <code>rerun_beta_analysis</code> is set to <code>true</code>, beta diversity comparisons for the groups specified in the variable <code>rerun_group</code>. The groups should be separated by spaces in <code>rerun_group</code>, and must be categorical (not continuous, i.e. not numeric). For example, if the metadata columns “sex”, “diet”, and “coat_color” were to be analysed, the variable should be:</p>
+<p><code>rerun_group=(sex diet coat_color)</code></p>
+<p>This analysis will create a folder called “beta_div_reruns” in the post-DADA2 outputs folder, containing all QIIME2 files describing the analyses, separated by group. The beta diversity is calculated as unweighted and weighted UniFrac.</p>
+<p>Similarly, <code>run_beta_continuous</code> can be set to <code>true</code> to calculate beta diversity comparisons for groups specified in the variable <code>continuous_group</code>, again with the groups separated by spaces. However, this comparison if specifically for continuous (numeric) metadata, and therefore is a two-sided Mantel test that compares two distance matrices. This will create the folder “rerun_beta_continuous”, again in the post-DADA2 outputs folder.</p>
+<p><br></p>
+</div>
+<div id="ancom-analyses" class="section level2">
+<h2>ANCOM analyses</h2>
+<p>ANCOM analyses can be conducted for the dataset by setting <code>run_ancom</code> to <code>true</code>, and by providing the groups of interest to <code>group_to_compare</code> as a space-separated list. The comparisons can be conducted at multiple phylogenetic levels, from level 1 (taxa combined by kingdom) to level 7 (taxa completely separate at the species level) by providing the levels to <code>collapse_taxa_to_level</code> as a space-separated list. All QIIME2 files are stored in a folder named “ancom_outputs” in the post-DADA2 outputs folder. For the QIIME2 documentation, look <a href="https://docs.qiime2.org/2019.10/tutorials/moving-pictures/#differential-abundance-testing-with-ancom">here</a>.</p>
+<p><br></p>
+</div>
+<div id="picrust2-metabolic-pathway-prediction" class="section level2">
+<h2>PICRUSt2 metabolic pathway prediction</h2>
+<p>If <a href="https://library.qiime2.org/plugins/q2-picrust2/13/">PICRUSt2 for QIIME2</a> is installed in your QIIME2 conda environment, PICRUSt2 can be run on your dataset by setting <code>run_picrust</code> to <code>true</code>. The results will be stored in a folder called “q2-picrust_output” in the post-DADA2 outputs folder.</p>
+<p>Inside, the folder “exported_tsv” contains the tabulated output from “pathway_abundance.qzv”, while “exported_tsv_ec” and “exported_tsv_ko” contain the tabulated output from “ec_metagenome.qzv” and “ko_metagenome.qzv” respectively. Core metrics functions are also conducted on the PICRUSt2 output, allowing for 3D PCoA plots calculated on the predicted pathways to be viewed under “pathabun_core_metrics/jaccard_emperor.qzv”.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>runtime_options.knit</title>
+
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">waterway</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="tut.html">Walkthrough</a>
+</li>
+<li>
+  <a href="runtime_options.html">Runtime Options</a>
+</li>
+<li>
+  <a href="fn.html">Functions Included</a>
+</li>
+<li>
+  <a href="config.html">Understanding config.txt</a>
+</li>
+<li>
+  <a href="rerunning.html">Optional Analyses</a>
+</li>
+<li>
+  <a href="vh.html">Version History</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<div id="general-syntax" class="section level2">
+<h2>General syntax</h2>
+<p><code>waterway</code> should be run in the following format:</p>
+<pre class="text"><code>waterway [path_to_config.txt] [options]</code></pre>
+<p><br></p>
+</div>
+<div id="path-to-config.txt" class="section level2">
+<h2>Path to config.txt</h2>
+<p>When <code>waterway</code> is first run in a new location (or when you point it to a new location), it will automatically create <code>config.txt</code> and <code>optional_analyses.txt</code>. Ignore <code>optional_analyses.txt</code> when you first run it, and instead go into the config file and change all required parameters. Then, once the parameters are changed, run waterway and direct it to the folder containing <code>config.txt</code> and <code>optional_analyses.txt</code>. For example, if the config files were located at /home/michael/config1/config.txt, the command would be:</p>
+<p><code>waterway /home/michael/config1</code></p>
+<p><br></p>
+</div>
+<div id="options" class="section level2">
+<h2>Options</h2>
+<p><strong>IMPORTANT:</strong> When using options with <code>waterway</code>, you must enter the path to the directory containing the config files as the first argument.</p>
+<p><code>waterway</code> currently supports the following options:</p>
+<pre class="text"><code>-f    List the functions used in waterway, then exit.
+-F    Run FastQC and MultiQC on the .fastq.gz files located at the filepath specified in config.txt.
+-h    Show a brief overview of waterway and its options, then exit.
+-l    Log all output to a log.out file created in the same folder as waterway.
+-m    Use a manifest file for the import step, as specified in the sourcefile.
+-M    Make a manifest file from the files located at the filepath.
+      This assumes that the Sample_ID is all text located before the first underscore in the filename.
+-n    Print the version number of this script, then exit.
+-r    Replaces underscores with hyphens in patterns inputted into the forward/reverse patterns in config.txt.
+      Useful for quickly fixing filename and SampleID errors when making a manifest file.
+-s    Create subsets from filtered metadata files added to &quot;filter_inputs&quot;.
+-t    Tests the output status, then exit. Print the unfinished and finished steps for the data.
+-T    Filter table.qza according to a filtered metadata file, located in the directory &quot;filter_inputs&quot;.
+      The directory is automatically created when running the option for the first time.
+-v    Verbost output. Enables detailed output of the waterway workflow.
+
+
+The following options install or enable commands, and should only be run once
+
+--add-waterway       Adds the waterway command to ~/.bashrc
+--install-deicode    Installs the DEICODE Qiime2 plugin
+--install-picrust    Installs the Picrust2 Qiime2 plugin</code></pre>
+<p>The following shortform options are also available in longform for readability:</p>
+<pre class="text"><code>-c    --train-classifier
+-f    --show-functions
+-F    --fastqc
+-h    --help
+-l    --log
+-m    --manifest
+-M    --make-manifest
+-n    --version
+-r    --rename
+-s    --subsets
+-t    --test
+-T    --filter-table
+-v    --verbose
+
+--install-deicode
+--install-picrust</code></pre>
+<p><code>waterway</code> supports multiple option inputs at once. To input options into waterway, use the general formula:</p>
+<p><code>./waterway.bash {path_to_config.txt} (options here)</code></p>
+<p>For example, when running <code>waterway</code> with with a manifest file import and logged output (and assuming the config files were located in the same place as the last example) the input would be:</p>
+<p><code>./waterway.bash /home/michael/config1.txt -m -l</code></p>
+<p>Take note that some options like <code>-t</code> or <code>-f</code> exit after completion (as specified above), and therefore will terminate waterway before other options are considered. These options should be run one at a time.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
